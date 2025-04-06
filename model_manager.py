@@ -49,6 +49,13 @@ Clearly highlight any criteria that are non-negotiable or will disqualify the bi
 ## STEP 3: Evaluate Company Profile Against Each Criteria
 For each requirement from Step 1, say whether the company **Meets** or **Does Not Meet** it. Justify briefly.
 
+## STEP 4: Final Verdict
+Based on the evaluation above, write this line at the end:
+
+Final Verdict: [ELIGIBLE / NOT ELIGIBLE ]
+
+Be strict and accurate. Do not make assumptions beyond the provided text.
+
 Use this format:
 - Requirement: [quoted requirement]
   - Company Status: Meets / Does Not Meet
