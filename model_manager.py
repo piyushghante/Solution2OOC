@@ -107,7 +107,7 @@ Use this format:
 ## STEP 4: Final Verdict
 Based on the evaluation above, write this line at the end:
 
-Final Verdict: [ELIGIBLE / NOT ELIGIBLE / UNCLEAR]
+Final Verdict: [ELIGIBLE / NOT ELIGIBLE ]
 
 Be strict and accurate. Do not make assumptions beyond the provided text.
 
