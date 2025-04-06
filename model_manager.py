@@ -25,12 +25,18 @@ def run_gemini_prompt(prompt: str, agent: str) -> str:
 
 # Utility: Extract final verdict from Gemini's response
 def extract_final_verdict(text: str) -> str:
-    match = re.search(
-        r"Final\s+Verdict\s*[:\-]?\s*(ELIGIBLE|NOT ELIGIBLE|UNCLEAR)",
-        text,
-        re.IGNORECASE
-    )
-    return match.group(1).upper() if match else "UNCLEAR"
+    patterns = [
+        r"Final\s+Verdict\s*[:\-]?\s*(ELIGIBLE|NOT ELIGIBLE)",  # Strongest
+        r"\bVerdict\s*[:\-]?\s*(ELIGIBLE|NOT ELIGIBLE)",        # Fallback
+        r"\b(ELIGIBLE|NOT ELIGIBLE)\b"                          # Weakest match
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            return match.group(1).upper()
+    
+    # ❌ If nothing matched, default to NOT ELIGIBLE
+    return "NOT ELIGIBLE"
 
 
 # Agent 1: Verdict Agent
