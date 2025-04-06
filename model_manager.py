@@ -24,8 +24,9 @@ def run_gemini_prompt(prompt: str, agent: str) -> str:
 
 # Optional Utility: Extract final verdict from Gemini's response
 def extract_final_verdict(text: str) -> str:
-    match = re.search(r"Final Verdict:\s*(ELIGIBLE|NOT ELIGIBLE|UNCLEAR)", text.upper())
-    return match.group(1) if match else "UNCLEAR"
+    match = re.search(r"Final Verdict[:\-]?\s*(ELIGIBLE|NOT ELIGIBLE|UNCLEAR)", text, re.IGNORECASE)
+    return match.group(1).upper() if match else "UNCLEAR"
+
 
 # Agent 1: Verdict Agent (STRONGLY STRUCTURED)
 # def run_verdict_agent(rfp_text: str, company_profile: str) -> str:
