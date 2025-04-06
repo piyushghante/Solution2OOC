@@ -319,15 +319,15 @@ if uploaded_rfp and uploaded_docx:
         display_markdown_report(report)
 
         # ✅ PDF Download Section
-        if st.button("📄 Download Submission-Ready PDF"):
-            pdf_path = generate_rfp_pdf(analysis)
-            with open(pdf_path, "rb") as f:
-                st.download_button(
-                    label="📥 Download Final RFP Report PDF",
-                    data=f,
-                    file_name="rfp_analysis_report.pdf",
-                    mime="application/pdf"
-                )
+        # if st.button("📄 Download Submission-Ready PDF"):
+        #     pdf_path = generate_rfp_pdf(analysis)
+        #     with open(pdf_path, "rb") as f:
+        #         st.download_button(
+        #             label="📥 Download Final RFP Report PDF",
+        #             data=f,
+        #             file_name="rfp_analysis_report.pdf",
+        #             mime="application/pdf"
+        #         )
 else:
     st.info("📌 Upload an RFP PDF and Company Profile DOCX to begin analysis.")
 
