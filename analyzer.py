@@ -1,0 +1,32 @@
+from model_manager import (
+    run_checklist_agent,
+    run_verdict_agent,
+    run_risk_agent,
+    run_summary_agent
+)
+
+def analyze_rfp(rfp_text: str, company_profile: str) -> dict:
+    """
+    Runs a full Gemini-powered RFP analysis:
+    - Eligibility check
+    - Submission checklist extraction
+    - Risk analysis with full context
+    """
+    results = {}
+
+    # Step 1: Eligibility Check (Verdict Agent)
+    eligibility = run_verdict_agent(rfp_text, company_profile)
+    results['Eligibility Verdict'] = eligibility.strip()
+
+    # Step 2: Submission Checklist (Checklist Agent) with context from verdict
+    checklist = run_checklist_agent(rfp_text, eligibility)
+    results['Submission Checklist'] = checklist.strip()
+
+    # Step 3: Contract Risk Analysis (Risk Agent) with context from both verdict and checklist
+    risks = run_risk_agent(rfp_text, checklist, eligibility)
+    results['Contract Risks'] = risks.strip()
+
+    summary = run_summary_agent(results)
+    results['Executive Summary'] = summary.strip()
+
+    return results
