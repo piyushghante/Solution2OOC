@@ -36,34 +36,28 @@ def run_verdict_agent(rfp_text: str, company_profile: str) -> str:
     prompt = f"""
 You are a government procurement compliance expert.
 
-Your job is to determine if the company is eligible to bid on the RFP. Follow the structured steps below strictly and be objective.
+Your task is to evaluate whether the company is eligible to bid for the given RFP. Return a strictly formatted JSON response.
 
-## STEP 1: Extract Key Eligibility Criteria from the RFP
-List all mandatory eligibility criteria. Use bullet points. Include requirements like:
-- Years of experience
-- Certifications
-- Turnover/financial thresholds
-- Legal registrations
-- Specific technical capabilities
-- Past project experience
+--- TASK INSTRUCTIONS ---
+1. Extract key eligibility criteria
+2. Identify deal-breaker requirements
+3. Evaluate the company against each criterion
+4. Based on this, return a JSON object in this format:
 
-## STEP 2: Identify Deal-Breaker Requirements
-Clearly highlight any criteria that are non-negotiable or will disqualify the bidder if unmet.
+{{
+  "verdict": "ELIGIBLE",        // or "NOT ELIGIBLE" or "UNCLEAR"
+  "reasoning": "Brief summary of why this verdict was reached.",
+  "evaluation": [
+    {{
+      "requirement": "string",
+      "status": "Meets / Does Not Meet / Unclear",
+      "reason": "short justification"
+    }}
+  ]
+}}
 
-## STEP 3: Evaluate Company Profile Against Each Criteria
-For each requirement from Step 1, say whether the company **Meets** or **Does Not Meet** it. Justify briefly.
-
-Use this format:
-- Requirement: [quoted requirement]
-  - Company Status: Meets / Does Not Meet / Unclear
-  - Reason: [brief explanation]
-
-## STEP 4: Final Verdict
-Based on the evaluation above, write this line clearly at the end:
-
-Final Verdict: [ELIGIBLE / NOT ELIGIBLE / UNCLEAR]
-
-Be strict and accurate. Do not make assumptions beyond the provided text.
+✅ Only return a valid JSON object.
+✅ Do NOT include markdown, headings, or explanations outside the JSON.
 
 --- RFP TEXT ---
 {rfp_text}
