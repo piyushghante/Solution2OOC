@@ -1,0 +1,15 @@
+# Core framework
+streamlit
+
+# Gemini API
+google-generativeai
+
+# Document processing
+python-docx
+PyMuPDF  # This gives you 'import fitz'
+
+# PDF generation
+fpdf
+
+# For .env and environment config (optional but useful)
+python-dotenv
