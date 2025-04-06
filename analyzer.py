@@ -38,6 +38,7 @@ def analyze_rfp(rfp_text: str, company_profile: str) -> dict:
 
     # Step 1: Run verdict agent and extract final eligibility
     eligibility_full_response = run_verdict_agent(rfp_text, company_profile)
+    st.code(eligibility_full_response, language='markdown')
     final_verdict = extract_final_verdict(eligibility_full_response)
 
     results['Eligibility Verdict'] = final_verdict
