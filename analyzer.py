@@ -2,7 +2,8 @@ from model_manager import (
     run_checklist_agent,
     run_verdict_agent,
     run_risk_agent,
-    run_summary_agent
+    run_summary_agent,
+    extract_final_verdict 
 )
 
 def analyze_rfp(rfp_text: str, company_profile: str) -> dict:
