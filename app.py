@@ -176,7 +176,7 @@ from document_processor import extract_text_from_pdf, extract_text_from_docx, cl
 from analyzer import analyze_rfp
 from report_generator import format_analysis_report
 from utils import display_markdown_report, highlight_verdict
-from pdf_generator import generate_rfp_pdf  # ✅ PDF generation support
+#from pdf_generator import generate_rfp_pdf  # ✅ PDF generation support
 import fitz  # PyMuPDF
 from docx import Document
 import google.generativeai as genai
