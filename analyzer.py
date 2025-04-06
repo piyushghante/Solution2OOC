@@ -13,10 +13,12 @@ def analyze_rfp(rfp_text: str, company_profile: str) -> dict:
     - Risk analysis with full context
     """
     results = {}
-
+########Added This code for Verdic
     # Step 1: Eligibility Check (Verdict Agent)
-    eligibility = run_verdict_agent(rfp_text, company_profile)
-    results['Eligibility Verdict'] = eligibility.strip()
+    eligibility_full_response = run_verdict_agent(rfp_text, company_profile)
+    final_verdict = extract_final_verdict(eligibility_full_response)
+    results['Eligibility Verdict'] = final_verdict
+    results['Verdict Details'] = eligibility_full_response.strip() 
 
     # Step 2: Submission Checklist (Checklist Agent) with context from verdict
     checklist = run_checklist_agent(rfp_text, eligibility)
