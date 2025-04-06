@@ -43,6 +43,7 @@ def extract_final_verdict(text: str) -> str:
 def run_verdict_agent(rfp_text: str, company_profile: str) -> str:
     prompt = f"""
 You are a government procurement compliance expert.
+Do not guess or infer. Only extract criteria that are explicitly and unambiguously mentioned in the RFP text
 
 Your task is to determine if the company is eligible to bid on the RFP. Use the following format.
 
