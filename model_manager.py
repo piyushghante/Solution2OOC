@@ -28,6 +28,55 @@ def extract_final_verdict(text: str) -> str:
     return match.group(1) if match else "UNCLEAR"
 
 # Agent 1: Verdict Agent (STRONGLY STRUCTURED)
+# def run_verdict_agent(rfp_text: str, company_profile: str) -> str:
+#     prompt = f"""
+# You are a government procurement compliance expert.
+
+# Your job is to determine if the company is eligible to bid on the RFP. Follow the structured steps below strictly and be objective.
+
+# ## STEP 1: Extract Key Eligibility Criteria from the RFP
+# List all mandatory eligibility criteria. Use bullet points. Include requirements like:
+# - Years of experience
+# - Certifications
+# - Turnover/financial thresholds
+# - Legal registrations
+# - Specific technical capabilities
+# - Past project experience
+
+# ## STEP 2: Identify Deal-Breaker Requirements
+# Clearly highlight any criteria that are non-negotiable or will disqualify the bidder if unmet.
+
+# ## STEP 3: Evaluate Company Profile Against Each Criteria
+# For each requirement from Step 1, say whether the company **Meets** or **Does Not Meet** it. Justify briefly.
+
+# ## STEP 4: Final Verdict
+# Based on the evaluation above, write this line at the end:
+
+# Final Verdict: [ELIGIBLE / NOT ELIGIBLE ]
+
+# Be strict and accurate. Do not make assumptions beyond the provided text.
+
+# Use this format:
+# - Requirement: [quoted requirement]
+#   - Company Status: Meets / Does Not Meet
+#   - Reason: [brief explanation]
+
+
+
+# ## Output Format:
+# 1. Key Criteria: [...]
+# 2. Deal-Breakers: [...]
+# 3. Evaluation Table: [...]
+
+# Be strict and accurate. Do not make assumptions beyond the provided text.
+
+# --- RFP TEXT ---
+# {rfp_text}
+
+# --- COMPANY PROFILE ---
+# {company_profile}
+# """
+#     return run_gemini_prompt(prompt, "verdict")
 def run_verdict_agent(rfp_text: str, company_profile: str) -> str:
     prompt = f"""
 You are a government procurement compliance expert.
@@ -49,24 +98,15 @@ Clearly highlight any criteria that are non-negotiable or will disqualify the bi
 ## STEP 3: Evaluate Company Profile Against Each Criteria
 For each requirement from Step 1, say whether the company **Meets** or **Does Not Meet** it. Justify briefly.
 
-## STEP 4: Final Verdict
-Based on the evaluation above, write this line at the end:
-
-Final Verdict: [ELIGIBLE / NOT ELIGIBLE ]
-
-Be strict and accurate. Do not make assumptions beyond the provided text.
-
 Use this format:
 - Requirement: [quoted requirement]
   - Company Status: Meets / Does Not Meet
   - Reason: [brief explanation]
 
+## STEP 4: Final Verdict
+Based on the evaluation above, write this line at the end:
 
-
-## Output Format:
-1. Key Criteria: [...]
-2. Deal-Breakers: [...]
-3. Evaluation Table: [...]
+Final Verdict: [ELIGIBLE / NOT ELIGIBLE / UNCLEAR]
 
 Be strict and accurate. Do not make assumptions beyond the provided text.
 
@@ -77,6 +117,7 @@ Be strict and accurate. Do not make assumptions beyond the provided text.
 {company_profile}
 """
     return run_gemini_prompt(prompt, "verdict")
+
 
 # Agent 2: Checklist Agent
 def run_checklist_agent(rfp_text: str, verdict: str) -> str:
