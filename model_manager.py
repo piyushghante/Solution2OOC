@@ -24,12 +24,14 @@ def run_gemini_prompt(prompt: str, agent: str) -> str:
 
 # Utility: Extract final verdict from Gemini's response
 def extract_final_verdict(text: str) -> str:
-    match = re.search(
-        r"Final\s+Verdict\s*[:\-]?\s*(ELIGIBLE|NOT ELIGIBLE|UNCLEAR)",
-        text,
-        re.IGNORECASE
-    )
-    return match.group(1).upper() if match else "UNCLEAR"
+    try:
+        json_start = text.find("{")
+        json_text = text[json_start:]
+        parsed = json.loads(json_text)
+        return parsed.get("verdict", "UNCLEAR").upper()
+    except Exception as e:
+        print("❌ Failed to extract verdict JSON:", e)
+        return "UNCLEAR"
 
 # Agent 1: Verdict Agent
 def run_verdict_agent(rfp_text: str, company_profile: str) -> str:
