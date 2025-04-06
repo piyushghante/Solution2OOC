@@ -18,7 +18,7 @@ st.set_page_config(
 
 st.markdown("""
     <h1 style='text-align: center;'>📑 AutoRFP.AI</h1>
-    <h4 style='text-align: center;'>Automating Government RFP Analysis with Gemini + RAG + Agentic Workflows ⚙️</h4>
+    <h4 style='text-align: center;'>Automating RFP Analysis with Gemini + RAG + Agentic Workflows ⚙️</h4>
     <hr>
 """, unsafe_allow_html=True)
 
