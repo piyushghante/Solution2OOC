@@ -14,5 +14,3 @@ fpdf
 # For .env and environment config (optional but useful)
 python-dotenv
 
-weasyprint
-libpango
