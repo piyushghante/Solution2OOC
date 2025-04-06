@@ -17,7 +17,7 @@ def highlight_verdict(text: str):
     """
     verdict = text.upper()
     
-    
+    print(verdict)
     if "NOT ELIGIBLE" in verdict:
         st.error("🚫 Verdict: NOT ELIGIBLE")
     elif "ELIGIBLE" in verdict:
