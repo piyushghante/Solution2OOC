@@ -39,28 +39,18 @@ def run_verdict_agent(rfp_text: str, company_profile: str) -> str:
     prompt = f"""
 You are a government procurement compliance expert.
 
-Your task is to evaluate whether the company is eligible to bid for the given RFP. Return a strictly formatted JSON response.
+Your task is to determine if the company is eligible to bid on the RFP. Use the following format.
 
---- TASK INSTRUCTIONS ---
-1. Extract key eligibility criteria
-2. Identify deal-breaker requirements
-3. Evaluate the company against each criterion
-4. Based on this, return a JSON object in this format:
+## STEP 1: Extract Key Eligibility Criteria
+...
 
-{{
-  "verdict": "ELIGIBLE",        // or "NOT ELIGIBLE" or "UNCLEAR"
-  "reasoning": "Brief summary of why this verdict was reached.",
-  "evaluation": [
-    {{
-      "requirement": "string",
-      "status": "Meets / Does Not Meet / Unclear",
-      "reason": "short justification"
-    }}
-  ]
-}}
+## STEP 4: Final Verdict
 
-✅ Only return a valid JSON object.
-✅ Do NOT include markdown, headings, or explanations outside the JSON.
+At the very end of your response, add this line:
+
+Final Verdict: [ELIGIBLE / NOT ELIGIBLE / UNCLEAR]
+
+This line must appear on its own.
 
 --- RFP TEXT ---
 {rfp_text}
@@ -69,6 +59,7 @@ Your task is to evaluate whether the company is eligible to bid for the given RF
 {company_profile}
 """
     return run_gemini_prompt(prompt, "verdict")
+
 
 # Agent 2: Checklist Agent
 def run_checklist_agent(rfp_text: str, verdict: str) -> str:
