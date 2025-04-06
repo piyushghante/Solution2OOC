@@ -15,3 +15,4 @@ fpdf
 python-dotenv
 
 weasyprint
+libpango
